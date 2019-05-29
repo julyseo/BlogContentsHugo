@@ -1,8 +1,17 @@
 language: go
+
 go:
-  - master
+  - "1.8"
+branches:
+  only:
+    - hugo 
 install:
-  - go get github.com/gohugoio/hugo
+    - uname -a
+    - wget https://github.com/gohugoio/hugo/releases/download/v0.55.4/hugo_0.55.4_Linux-64bit.deb
+    - sudo dpkg -i hugo*.deb
+    - hugo version
+    - ls
+    - pwd
 script:
   - hugo
 deploy:
@@ -11,7 +20,7 @@ deploy:
   target_branch: master
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Travis CI 가 깃허브에 직접 업로드 하기위한 토큰
+  github_token: $GITHUB_TOKEN
   email: wotjd971102@gmail.com
   name: "wotjd"
   on:
