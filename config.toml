@@ -18,8 +18,8 @@ languageCode = "ko-kr"
 defaultContentLanguage = "en-us"
 title = "엉망진창 Swift 코딩"
 theme = "hugo-tranquilpeak-theme"
-disqusShortname = "엉망진창 Swift 코딩"
-# googleAnalytics = "UA-123-45"
+disqusShortname = "wotjd"
+googleAnalytics = "UA-141048320-1"
 paginate = 7
 canonifyurls = true
 
