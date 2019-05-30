@@ -243,8 +243,6 @@ let pizzaStore = PizzaStore(pizzas: allPizzas)
 ![](/res/img/ioc/ioc_diagram.jpg)
 - IoC, DI의 관계도
 
-![](/Users/edge/Library/Mobile Documents/com~apple~CloudDocs/wotjd/wotjd-blog/static/res/img/ioc/ioc_diagram.jpg)
-
 ![](/res/img/ioc/DI-vs-IoC.png)
 - 키워드는 잘 제시됐지만, IoC 가 DI 를 품고 있어야 맞는 그림인 것 같다. (Pure DI 도 IoC 에 포함이다)  
 DI 내에서 Pure DI 와 IoC Container 를 나눈 것은 좋은 생각인 것 같다.
