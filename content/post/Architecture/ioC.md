@@ -238,11 +238,18 @@ let pizzaStore = PizzaStore(pizzas: allPizzas)
 
 
 
-## 도움이 될만한 이미지 (그리고 사족)
+## 도움이 될만한 이미지
 
-추가 예정
+![](/res/img/ioc/ioc_diagram.jpg)
+- IoC, DI의 관계도
 
-## 참고한 사이트들 (그리고 사족)
+![](/Users/edge/Library/Mobile Documents/com~apple~CloudDocs/wotjd/wotjd-blog/static/res/img/ioc/ioc_diagram.jpg)
+
+![](/res/img/ioc/DI-vs-IoC.png)
+- 키워드는 잘 제시됐지만, IoC 가 DI 를 품고 있어야 맞는 그림인 것 같다. (Pure DI 도 IoC 에 포함이다)  
+DI 내에서 Pure DI 와 IoC Container 를 나눈 것은 좋은 생각인 것 같다.
+
+## 참고한 사이트들
 
 #### 위키백과는 훌륭한 백과사전입니다.
 
