@@ -11,10 +11,18 @@ tags:
   - IoC Container
   - Swift
   - 의존성 주입
-# thumbnailImagePosition: left
-# thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/highlighted-code-showcase/peak-140.jpg
-
+thumbnailImagePosition: top
+thumbnailImage: /res/img/ioc/ioc_diagram.jpg
+# metaAlignment: center
 ---
+IoC 관련 스터디를 하던 도중에 최신 자료의 부재, 모호한 설명이 많고,   
+한 게시글에 이해하기 쉽게 만들어진 자료가 부족하다고 느껴져서   
+내가 찾아보고 이해한 내용을 되새기는 차원에서 정리했다.
+<!--more-->
+
+<!--toc-->
+
+# 들어가기에 앞서
 
 인터넷에서 돌아다니는 글들을 모아 정리한 글이며, 내용이 틀릴 수 있음.  
 예시 코드 내 클래스 명이라던가 메서드 명이라던가 아주 유명한 코드를 끌어다 썼지만,  
@@ -22,12 +30,7 @@ Swift 기반으로 직접 다시 작성하였다.
 
 > PS. 쓰고보니 이론적인건 크게 중요하지 않음.. 개념을 모르고도 쓰던 부분이 대부분
 
-## 들어가기에 앞서
-
-원래 글을 쓸 생각 없이 궁금해서 찾아봤으나 최근보다는 예전 자료들이 많고,   
-한 게시글에 이해하기 쉽게 만들어진 자료가 부족하다고 느껴서   
-내가 보고 이해한 내용을 아카이빙 하는 차원에서 정리했다.
-
+## 부족했던 것들
 내가 구글링한 자료들에는 다음과 같은 내용이 부족했다는 느낌이 있었다.  
 
 1. IoC, DI, DIP, IoC Container 를 한꺼번에 다루는 **한글 자료** 가 드물고 **최신 자료는** 더 드물다
@@ -41,11 +44,9 @@ Swift 기반으로 직접 다시 작성하였다.
 
 > 글 솜씨도 없고 내 입맛대로 휘갈긴 글이므로 참고용으로만.   ~~더 잘 정리된 글이 분명 어딘가에 있을ㄱ...~~
 
+# IoC, DI, DIP, IoC Container 살펴보기
 
-
-## 본격적인 설명
-
-### IoC (Inversion of Control)
+## IoC (Inversion of Control)
 
 - Hollywood Principle 이라고도 함 (할리우드 원칙, “먼저 연락하지 마세요. 필요하면 연락할게요”)
 - 그냥 콜백을 넘기는 게 될 수도 있고, 인터페이스를 구현해서 넘기는 게 될 수도 있고, 여러 가지임
@@ -53,27 +54,13 @@ Swift 기반으로 직접 다시 작성하였다.
 - Inline 형태로 존재해야할 코드를 사용하는 놈에게 달라고 떠넘기고 수행하는 놈은 준걸 그대로 호출하도록 바꾸는 개념
 - 없던 의존성을 만들어내는 것도 이 개념에 부합함
 
-```swift
-self.dismiss(true) {
-	print("dismissed")
-} // 콜백 넘김
-```
+{{< gist wotjd 85ebad0375531b220252667a305c3d21 >}}
 
 - 자바에서 아래와 같이 쓰는 것도 포함 (Swift에선 안됨)
 
-```java
-// Java Code
-new Thread(new Runnable() {
-	@Override
-	public void run() {
-		// do something
-	}
-}).start();
-```
+{{< gist wotjd 188fb930ed9442e45410fab8c8816544 >}}
 
-
-
-### DI (Dependency Injection)
+## DI (Dependency Injection)
 
 - 개념상 IoC 에 포함됨 : **의존성이 이미 있는 상태라는 전제 조건**,   
   의존성이 이미 있는 경우에 클래스 내에서 의존하고 있는 어떤 객체를   
@@ -86,52 +73,19 @@ new Thread(new Runnable() {
 - 근데 의존성이 많아지면 코드가 길~~어짐 (불-편)   
 --> 요거 해결하려고 IoC Container (DI Container) 가 등장
 
-```swift
-let shippingService = ShippingService(locator: ProductLocator(), pricing: PricingService(), inventory: InventoryService(), tracking : TrackingRepository(config : ConfigProvider()), …)
-```
+{{< gist wotjd 4e16c33cad6255524c4ee79afbd35c91 >}}
 
 > 추상화 부분은 고려되지 않음 : 추상화 클래스로써 포함하든, 구현 클래스로써 포함하든 상관없음. 그냥 의존성을 분리하는 개념
 
-#### Before DI (클래스 내부에서 의존성 객체 생성)
+### Before DI (클래스 내부에서 의존성 객체 생성)
 
-```swift
-class Heater { … }
-class Pump { … }
+{{< gist wotjd 88998d42348a7dd450041078884df08b >}}
 
-class CoffeeMaker {
-  var heater = Heater()
-  var pump = Pump()
-	…
-}
+### After DI (initializer DI, 생성자로 의존성 객체 전달 받음)
 
-// usage
-let coffeeMaker = CoffeeMaker()
-```
+{{< gist wotjd 81b64993180785e0ac09476693c8ec2d >}}
 
-#### After DI (initializer DI, 생성자로 의존성 객체 전달 받음)
-
-```swift
-class Heater { … }
-class Pump { … }
-class CoffeeMaker {
-  var heater : Heater
-  var pump : Pump
-  
-  init(heater : Heater, pump : Pump) {
-    self.heater = heater
-    self.pump = pump
-  }
-}
-
-// usage
-let heater = Heater()
-let pump = Pump()
-let coffeeMaker = CoffeeMaker(heater: heater, pump: pump)	// 의존성 객체는 외부에서 생성하여 넘김
-```
-
-
-
-### DIP (Dependency Inversion Priciple)
+## DIP (Dependency Inversion Priciple)
 
 - 기본적으로 DI를 베이스로 하는 개념   
 (**DI + 추상화** 정도로만 생각하는게 정신건강에 이로울 것 같음, 그 이상은 Too Much)
@@ -144,27 +98,9 @@ let coffeeMaker = CoffeeMaker(heater: heater, pump: pump)	// 의존성 객체는
 - 위 설명은 IoC 에도 일부 적용됨, 다른 점은 DIP는 추상화된 객체가 구현 부의 멤버로 선언이 되어 있어야 함 (당연히 의존성이 있으니까)
 - **추상화의 효과로 테스트 용이성, 확장성, 다형성 등이 따라온다.**
 
-#### Before DIP
+### Before DIP
 
-```swift
-class HawaiianPizza : Pizza { func bake() { print(“baked HawaiianPizza”) } }
-class CheezePizza : Pizza { func bake() { print(“baked CheezePizza”) } }
-
-class PizzaStore {
-  var hawaiianPizza : HawaiianPizza
-  var cheezePizza : CheezePizza
-  
-  init(hawaiianPizza : HawaiianPizza, cheezePizza : CheezePizza) {
-    self.hawaiianPizza = hawaiianPizza
-    self.cheezePizza = cheezePizza
-  }
-  
-  func bakePizzas() {
-    self.hawaiianPizza.bake()
-    self.cheezePizza.bake()
-  }
-}
-```
+{{< gist wotjd e9c34e3e5edf8ce16ef20d20557e9516 >}}
 
 - 피자 종류를 늘려달라는 요구사항이 들어온다면..   
 새로운 Pizza 클래스 만들고.. PizzaStore 코드 수정하고..  
@@ -173,44 +109,15 @@ OO 씨 다 했어? 그럼 다른 피자도 추가해줘~ ~~ㅁㄴㅇㄹㄴㅇ러
  새로운 Pizza 클래스에서 bake 메서드가 없다면..?   
  혹은 다른 이름의 메서드로 구현이 되어있다면..? ~~ㄹ냐ㅐ어래냐ㅓ래ㅑㄴ먀ㅐ어~~
 
-#### After DIP
-
-```swift 
-protocol Pizza { func bake() }
-class HawaiianPizza : Pizza { func bake() { print(“baked HawaiianPizza”) } }
-class CheezePizza : Pizza { func bake() { print(“baked CheezePizza”) } }
-
-class PizzaStore {
-  var pizzas : [Pizza]
-  
-  init(pizzas: [Pizza]) {
-    self.pizzas = pizzas
-  }
-  
-  func bakePizzas() {
-    // 다양한 피자를 한 Array 로 저장하여 고차함수 활용도 가능해짐
-    pizzas.map { pizza in
-      pizza.bake()
-    }
-  }
-}
-
-let pizzaStore = PizzaStore(pizzas: [HawaiianPizza(), CheezePizza()])
-
-/* console
-	baked HawaiianPizza
-	baked CheezePizza
-*/
-```
+### After DIP
+{{< gist wotjd cc41cde976abbd03d0ad1aa4db031413 >}}
 
 - 피자 클래스에서 공통적으로 구현이 되어야 할 (PizzaStore 에서 사용해야 하는) bake 메서드를 Protocol 에 선언 (인터페이스 화)
 - 모든 Pizza 클래스는 bake 메서드를 구현해야 함 (내부에서 어떻게 구현하고 동작할지는 지들 맘대로)
 - PizzaStore 에선 Protocol 에 선언된 함수만 사용
 - 뭔가 거창하게 얘기한 것 같지만 그냥 DI + 추상화 한 거
 
-
-
-### IoC Controller (Inversion of Control Controller)
+## IoC Controller (Inversion of Control Controller)
 
 - DI에서 이니셜라이저 인자로 뺀 의존성 들을 관리하는 느낌
 - DI랑 다른 점은 DI는 구 현부, IoC Controller는 사용부 정도로 생각됨
@@ -220,36 +127,22 @@ let pizzaStore = PizzaStore(pizzas: [HawaiianPizza(), CheezePizza()])
 Init DI가 된 의존성 많은 클래스를 선언할 때 코드 양을 줄여준다 정도..?   
 (근데 Service Locator로 빼는 코드는 생각 안 함..?)
 
-#### 예시
+### 예시
 
-```swift
-protocol Pizza {}
-class HawaiianPizza : Pizza {}
-class CheezePizza : Pizza {}
-class ShrimpPizza : Pizza {}
-…
-// without IoC Container : DIP 에서 쓰던 방식, PizzaStore 사용하는 쪽에서 일일이 Pizza 객체를 선언
-let pizzaStore = PizzaStore(pizzas: [HawaiianPizza(), CheezePizza(), ShrimpPizza(), …])
+{{< gist wotjd eaffd1d9fc3c4f17597c26dd7446f0f8 >}}
 
-// with IoC : Pizza 인터페이스를 구현하는 모든 클래스의 인스턴스를 container 에서 받아옴
-let allPizzas : [Pizza] = container.getAllObjects<Pizza>()
-let pizzaStore = PizzaStore(pizzas: allPizzas)
-```
-
-
-
-## 도움이 될만한 이미지
-
-![](/res/img/ioc/ioc_diagram.jpg)
+# 도움이 될만한 이미지
 - IoC, DI의 관계도
+![](/res/img/ioc/ioc_diagram.jpg)
 
+- DI 와 IoC 영역 비교 (잘못된 그림)
 ![](/res/img/ioc/DI-vs-IoC.png)
-- 키워드는 잘 제시됐지만, IoC 가 DI 를 품고 있어야 맞는 그림인 것 같다. (Pure DI 도 IoC 에 포함이다)  
+키워드는 잘 제시됐지만, IoC 가 DI 를 품고 있어야 맞는 그림인 것 같다. (Pure DI 또한 IoC 에 포함이다)  
 DI 내에서 Pure DI 와 IoC Container 를 나눈 것은 좋은 생각인 것 같다.
 
-## 참고한 사이트들
+# 참고한 사이트들
 
-#### 위키백과는 훌륭한 백과사전입니다.
+## 위키백과는 훌륭한 백과사전입니다.
 
 한글이 아니라 영어일 때. ~~한글문서가 그냥 커피라면, 영어문서는 TOP야..~~
 
@@ -259,13 +152,13 @@ DI 내에서 Pure DI 와 IoC Container 를 나눈 것은 좋은 생각인 것 �
 2. [의존관계 역전 원칙](https://ko.wikipedia.org/wiki/의존관계_역전_원칙) : Dependancy Inversion Principle (DIP)
 3. [제어 반전](https://ko.wikipedia.org/wiki/제어_반전) : Inversion of Control (IoC)
 
-#### 꽤 잘 설명된 글들
+## 꽤 잘 설명된 글들
 
 1. [Dependency Injection 이란?](https://medium.com/@jang.wangsu/di-dependency-injection-이란-1b12fdefec4f) : IoC Container 를 제외하면 최신이고, 예시 코드들이 Swift 였기 때문에 이해하기 좋았음
 2. https://ahea.wordpress.com/2018/09/09/1754/ : DIP에 대한 설명은 없지만 IoC의 개념과 DI의 종류가 적절한 예시 코드로 잘 설명되어있음
 3. https://edykim.com/ko/post/the-service-locator-is-an-antipattern/ : 서비스 로케이터가 왜 안티-패턴인지에 대한 설명과 코드를 통한 이해 과정, 정리가 잘 되어 있음
 
-#### 읽다보면 더 혼란스러워 질 수 있는 글들
+## 읽다보면 더 혼란스러워 질 수 있는 글들
 
 근데 다 알고보면 이해가 가기도 한다.
 
