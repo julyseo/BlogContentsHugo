@@ -30,7 +30,9 @@ Tranquilpeak 는 [c7d2fde](https://github.com/kakawait/hugo-tranquilpeak-theme/t
 결과적으로는 어느정도 불편하지 않을 정도로만 수정하도록 타협하여 적용했다.  
 삽질을 많이 한 만큼 꽤나 긴 문서가 될 것 같다.
 
-# 3. 테마 선정 및 커스터마이징 ~~삽질~~
+-----
+
+# 테마 선정 및 커스터마이징 ~~삽질~~
 
 https://themes.gohugo.io (Hugo Themes) 에서 여러가지 테마를 고를 수 있다.
 

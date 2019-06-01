@@ -19,7 +19,7 @@ Hosting Blog via Github Pages with Hugo on Mac, 맥에서 Hugo 로 Github Pages 
 Hugo 는 포스팅 하는 당시의 최신버전을 사용한다. (v0.55.6/extended darwin/amd64)
 <!--toc-->
 
-# 2. Hugo 시작하기
+# Hugo 시작하기
 
 ## 왜 Hugo 인가요
 

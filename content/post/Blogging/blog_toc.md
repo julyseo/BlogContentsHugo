@@ -12,7 +12,7 @@ tags:
   - Github Pages
 # thumbnailImagePosition: left
 # thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/highlighted-code-showcase/peak-140.jpg
-# draft: true
+draft: true
 ---
 Hosting Blog via Github Pages with Hugo on Mac, 맥에서 Hugo 로 Github Pages 에 블로그 호스팅하기
 <!--toc-->
