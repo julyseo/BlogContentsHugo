@@ -1,15 +1,20 @@
 ---
-title: "Hugo 로 github 블로그 시작하기 - 3. 테마 선정 및 커스터마이징"
+title: "[Blogging] Hugo 로 github 블로그 시작하기 - 3. 테마 선정 및 커스터마이징"
 date: 2019-05-31T17:00:16+09:00
 categories:
   - Blogging
+  - 블로그 시작하기
 tags:
   - Blogging
   - Blog
-  - 블로그
   - Hugo
-  - Github
-  - Github Pages
+  - Theme
+  - Customizing
+  - Tranquilpeak
+  - 블로그
+  - 휴고
+  - 테마
+  - 커스터마이징
 # thumbnailImagePosition: left
 # thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/highlighted-code-showcase/peak-140.jpg
 # draft: true

@@ -1,5 +1,5 @@
 ---
-title: "IoC 관련 끄적 (IoC, DI, DIP, IoC Container)"
+title: "[Architecture] IoC 관련 끄적 (IoC, DI, DIP, IoC Container)"
 date: 2019-05-28
 categories:
   - Architecture

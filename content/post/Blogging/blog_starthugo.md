@@ -1,15 +1,15 @@
 ---
-title: "Hugo 로 github 블로그 시작하기 - 2. Hugo 시작하기"
+title: "[Blogging] Hugo 로 github 블로그 시작하기 - 2. Hugo 시작하기"
 date: 2019-05-31T16:48:16+09:00
 categories:
   - Blogging
+  - 블로그 시작하기
 tags:
   - Blogging
   - Blog
-  - 블로그
   - Hugo
-  - Github
-  - Github Pages
+  - 블로그
+  - 휴고
 # thumbnailImagePosition: left
 # thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/highlighted-code-showcase/peak-140.jpg
 # draft: true

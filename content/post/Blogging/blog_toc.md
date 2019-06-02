@@ -1,5 +1,5 @@
 ---
-title: "Hugo 로 github 블로그 시작하기 - 0. 개요"
+title: "[Blogging] Hugo 로 github 블로그 시작하기 - 0. 개요"
 date: 2019-05-31T11:06:16+09:00
 categories:
   - Blogging

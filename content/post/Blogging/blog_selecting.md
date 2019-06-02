@@ -1,15 +1,17 @@
 ---
-title: "Hugo 로 github 블로그 시작하기 - 1. 블로그 서비스/프레임워크 선택"
+title: "[Blogging] Hugo 로 github 블로그 시작하기 - 1. 블로그 서비스/프레임워크 선택"
 date: 2019-05-31T16:38:16+09:00
 categories:
   - Blogging
+  - 블로그 시작하기
 tags:
   - Blogging
   - Blog
-  - 블로그
   - Hugo
   - Github
   - Github Pages
+  - 블로그
+  - 휴고
 # thumbnailImagePosition: left
 # thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/highlighted-code-showcase/peak-140.jpg
 # draft: true
@@ -17,6 +19,7 @@ tags:
 Hosting Blog via Github Pages with Hugo on Mac, 맥에서 Hugo 로 Github Pages 에 블로그 호스팅하기
 <!--toc-->
 # 개요
+
 
 ## 뻘글
 

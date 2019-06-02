@@ -1,15 +1,20 @@
 ---
-title: "Hugo 로 github 블로그 시작하기 - 4. Repository 관리 및 Github Pages 호스팅"
+title: "[Blogging] Hugo 로 github 블로그 시작하기 - 4. Repository 관리 및 Github Pages 호스팅"
 date: 2019-05-31T18:38:16+09:00
 categories:
   - Blogging
+  - 블로그 시작하기
 tags:
   - Blogging
   - Blog
-  - 블로그
   - Hugo
+  - Static Site Generator
+  - SSG
   - Github
   - Github Pages
+  - 블로그
+  - 휴고
+  - 정적 사이트 생성기
 # thumbnailImagePosition: left
 # thumbnailImage: //d1u9biwaxjngwg.cloudfront.net/highlighted-code-showcase/peak-140.jpg
 # draft: true 
