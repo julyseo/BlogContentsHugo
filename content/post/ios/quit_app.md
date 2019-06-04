@@ -1,0 +1,99 @@
+---
+title: "[iOS] 앱 종료하기 (How to quit app in Swift)"
+date: 2019-06-04T15:23:03+09:00
+categories:
+- iOS
+- Tips
+tags:
+- iOS
+- Tips
+- Swift
+- UIKit
+- Quit App
+- 앱 종료
+#thumbnailImage: //example.com/image.jpg
+---
+iOS 앱을 코드 상에서 종료하고 싶을 때가 있을 것이다. (위대하신 클라이언트님의 요구사항으로 인해)
+
+그러나 어디에도 공식적으로 제공하는 API 가 없다.   
+그럼 뭔가 불안한데.. 앱을 종료하지 말라는 건가..
+
+# 결론부터
+
+결국 아래와 같이 호출해서 홈으로 이동하게 끔 하였다. (*Suspend*)  
+<br>
+
+{{< gist wotjd ceff89037b6074961b95f2c2fef71c65 >}}
+
+------
+
+# 약간의 삽질
+
+여기저기 찾아보니 Apple Document 의 이런 글을 찾았다.
+
+[How do I programmatically quit my iOS application?](https://developer.apple.com/library/archive/qa/qa1561/_index.html)
+
+굉장히 심플한 글이고, 요약하자면 아래와 같다.
+
+> **Q.** 코드 상에서 앱 종료하고 싶어요!
+>
+> **A.** 그런 API 는 없단다. iOS 에선 보통 홈버튼으로 나가잖니.   
+> 앱에 너가 원하는 기능을 제공 못할때에 대한 상태를 관리하렴.   
+> 추천하는 방법은 알림을 띄워서 유저가 자연스럽게 알아채게 해   
+> 그럼 유저가 알아서 와이파이를 켜던, 뭘 하든 액션을 취하겠지??
+
+그래.. 그래서 방법은..??
+
+> **Warning:** `exit` 함수 호출하지마. `exit` 쓰면 강제종료된 것 처럼 보인단말야 ㅎㅎ   
+> 글고 `applicaitonWillTerminate` 같은 `UIApplicationDelegate` 메소드 들도 호출 안돼서 데이터도 다 날라갈거임   
+> 테스트 중이면 `abort` 나 `assert` 매크로 써도 대 ㅎㅎ
+
+~~ㅎㅎㅎㅎ 그럼 '어쩔 때 앱 종료 시켜주세요!' 하는 요구사항을 바꾸란거니..^^~~   
+애플넘들.. 코드라도 한줄 써놓지.. 구글링 해본다.. 후..
+
+## 구글링
+
+<!-- ios.. go.. home.. programtically   -->
+![](/res/img/ios/search_quit.gif) *(마법의 문장 programmatically)*
+
+그리고 도움이 될만한 두 링크를 찾았다.
+
+- [How to exit app and return to home screen in iOS 8 using Swift programming](https://stackoverflow.com/questions/26511014/how-to-exit-app-and-return-to-home-screen-in-ios-8-using-swift-programming)
+- [Suspend the application](https://stackoverflow.com/questions/5360846/suspend-the-application)
+
+홈 버튼과 같은 역할을 하는 suspend 를 이용하면 된다하고,  
+중간에 Quit 을 하지 말아야 할 이유도 적혀있다.  
+iOS Human Interface Guide 문서에 명시가 되어있다 하는데, 최근에는 그 내용이 사라진 것 같다.
+
+그리고 조금 더 구글링을 해보니 `exit` 을 호출하는 앱은   
+**Appstore 심사 리젝 대상** 이라고 한다.
+
+## 근데.. 어떻게?
+iOS 에서, 그것도 swift 에서 exit 이라는 C 함수를 호출할 수 있다니  
+사실 질문거리도 아니다. C언어를 기반으로 만들어진 Objective-C,  
+그런 Objective-C의 일부를 swift 에서도 사용할 수 있기 때문이다.
+
+각 언어의 역사와 관계에 대해서도 자세히 파고들면 방대한 내용이므로 생략한다.  
+그냥 하지말라는걸 하지 않으면 되는 것이다!
+~~(사실 Objective-C 는 배워본 적도 없ㄷ)~~
+
+![](/res/img/ios/objc_in_trash.jpeg)
+
+------
+
+# 다시 결론
+
+Apple Document 의 권장사항을 반영하여   
+다음과 같이 약간의 시나리오 수정이 있었다.  
+<br>
+
+1. 앱이 종료되어야 할 상황에 팝업 출력 
+2. 팝업의 나가기 버튼을 눌렀을 때 suspend
+
+해당 상황에 팝업을 띄워 유저가 알아 챌 수 있도록 하였다.  
+그리고, 팝업의 버튼을 누르는 경우 아래 코드를 실행시킨다.  
+<br>
+
+{{< gist wotjd ceff89037b6074961b95f2c2fef71c65 >}}
+
+끝.
