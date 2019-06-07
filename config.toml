@@ -94,13 +94,20 @@ canonifyurls = true
 
 [[menu.links]]
   weight = 3
+  identifier = "categories_dev"
+  name = "Development"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
+  url = "/categories/development"
+
+[[menu.links]]
+  weight = 4
   identifier = "categories_architecture"
   name = "Architecture"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
   url = "/categories/architecture"
 
 [[menu.links]]
-  weight = 4
+  weight = 5
   identifier = "categories_blogging"
   name = "Blogging"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
