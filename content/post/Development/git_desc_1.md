@@ -307,7 +307,8 @@ git 은 버전 별로 파일들의 스냅샷을 저장하기 때문에
 - [Git 기초](https://git-scm.com/book/ko/v2/시작하기-Git-기초)
 - [Git Gud: The Wokring Tree, Staging Area, Local Repo](https://medium.com/@lucasmaurer/git-gud-the-working-tree-staging-area-and-local-repo-a1f0f4822018)
 - [지옥에서 온 Git](https://opentutorials.org/course/2708)
-- 
+
+
 ---
 꽤 많은 내용을 다룬 것 같지만 빠진 내용이 몇개 있다.  
 저장소 내부 구조 및 요소 설명이라던지, 브랜치, 명령어 설명 등..
